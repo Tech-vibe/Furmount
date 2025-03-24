@@ -1,4 +1,5 @@
 /*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -12,6 +13,7 @@
     --color-blue-600: oklch(0.546 0.245 262.881);
     --color-blue-700: oklch(0.488 0.243 264.376);
     --color-indigo-50: oklch(0.962 0.018 272.314);
+    --color-indigo-200: oklch(0.87 0.065 274.039);
     --color-indigo-600: oklch(0.511 0.262 276.966);
     --color-indigo-700: oklch(0.457 0.24 277.023);
     --color-indigo-800: oklch(0.398 0.195 277.366);
@@ -85,6 +87,7 @@
     --default-mono-font-variation-settings: var(
       --font-mono--font-variation-settings
     );
+    --font-pacifico: 'Pacifico', 'cursive';
   }
 }
 @layer base {
@@ -451,6 +454,9 @@
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
+  .mt-11 {
+    margin-top: calc(var(--spacing) * 11);
+  }
   .mt-16 {
     margin-top: calc(var(--spacing) * 16);
   }
@@ -495,6 +501,9 @@
   }
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
+  }
+  .ml-20 {
+    margin-left: calc(var(--spacing) * 20);
   }
   .box-border {
     box-sizing: border-box;
@@ -635,6 +644,9 @@
   .max-h-16 {
     max-height: calc(var(--spacing) * 16);
   }
+  .max-h-17 {
+    max-height: calc(var(--spacing) * 17);
+  }
   .max-h-none {
     max-height: none;
   }
@@ -706,6 +718,9 @@
   }
   .max-w-16 {
     max-width: calc(var(--spacing) * 16);
+  }
+  .max-w-17 {
+    max-width: calc(var(--spacing) * 17);
   }
   .max-w-none {
     max-width: none;
@@ -1151,6 +1166,13 @@
   }
   .gap-x-8 {
     column-gap: calc(var(--spacing) * 8);
+  }
+  .space-x-1 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 1) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-x-reverse)));
+    }
   }
   .space-x-3 {
     :where(& > :not(:last-child)) {
@@ -1668,9 +1690,6 @@
   .px-35 {
     padding-inline: calc(var(--spacing) * 35);
   }
-  .py-1 {
-    padding-block: calc(var(--spacing) * 1);
-  }
   .py-1\.5 {
     padding-block: calc(var(--spacing) * 1.5);
   }
@@ -1776,6 +1795,9 @@
   .align-top {
     vertical-align: top;
   }
+  .font-pacifico {
+    font-family: var(--font-pacifico);
+  }
   .font-sans {
     font-family: var(--font-sans);
   }
@@ -1814,10 +1836,6 @@
   .text-sm {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
-  }
-  .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
   }
   .text-xs {
     font-size: var(--text-xs);
@@ -2514,6 +2532,13 @@
       }
     }
   }
+  .hover\:bg-indigo-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-indigo-200);
+      }
+    }
+  }
   .hover\:bg-indigo-600 {
     &:hover {
       @media (hover: hover) {
@@ -2954,6 +2979,11 @@
       }
     }
   }
+  .lg\:gap-x-16 {
+    @media (width >= 64rem) {
+      column-gap: calc(var(--spacing) * 16);
+    }
+  }
   .lg\:space-x-6 {
     @media (width >= 64rem) {
       :where(& > :not(:last-child)) {
@@ -2981,6 +3011,11 @@
   .lg\:pr-8 {
     @media (width >= 64rem) {
       padding-right: calc(var(--spacing) * 8);
+    }
+  }
+  .lg\:pl-8 {
+    @media (width >= 64rem) {
+      padding-left: calc(var(--spacing) * 8);
     }
   }
   .lg\:text-left {

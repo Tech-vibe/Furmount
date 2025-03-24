@@ -1,0 +1,800 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* Ensure smooth transition for the slider */
+    .swiper-pagination-bullet {
+    background-color: black !important; /* Change color of all dots */
+  }
+
+  /* Change the color of the active dot to a different color, e.g., grey */
+  .swiper-pagination-bullet-active {
+    background-color: rgb(54, 54, 54) !important; /* Change color of active dot */
+  }
+    .fade {
+      transition: opacity 0.5s ease;
+      opacity: 0;
+    }
+    .fade-in {
+      opacity: 1;
+    }
+
+    /* Custom styles for responsive product cards */
+    .product-card {
+      transition: transform 0.5s ease-in-out;
+      width: 400px;
+      height: 300px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .product-card {
+        width: 100%;
+        height: auto;
+      }
+
+      .slider-wrapper {
+        flex-direction: column;
+      }
+
+      .text-wrapper {
+        margin-top: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+    
+</head>
+<body class="font-sans">
+    <body class="bg-blue-500">
+        <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
+            <a class="text-3xl  leading-none flex  items-center" href="#">
+                <img src="./img/bird_2.jpg" alt="logo" class="object-cover max-h-17 max-w-17  pb-3  ">
+                <span class="text-2xl font-semibold pb-2 font-pacifico text-transparent bg-clip-text bg-gradient-to-r to-indigo-700 from-violet-500 ">Furmount</span>
+            </a>
+            <div class="lg:hidden">
+                <button class="navbar-burger flex items-center text-blue-600 p-3">
+                    <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Mobile menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+                <li><a class="inline-flex w-full  gap-x-1.5  bg-white text-gray-600 hover:text-black px-3 py-2 text-sm  hover:bg-gray-50" href="#">Home</a></li>
+                
+                <div class="relative inline-block text-left">
+                    <div>
+                      <button type="button" class="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-semibold hover:bg-gray-50 transition ease-in-out" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                        Services
+                        <svg class="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                      </button>
+                    </div>
+                  
+                    <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu">
+                      <div class="" role="none">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-200 rounded-md" role="menuitem" tabindex="-1" id="menu-item-0">Pet Shop</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-200 rounded-md" role="menuitem" tabindex="-1" id="menu-item-1">Pet Products</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-200 rounded-md" role="menuitem" tabindex="-1" id="menu-item-2">Pet care</a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <script>
+                    const menuButton = document.getElementById('menu-button');
+                    const dropdownMenu = document.getElementById('dropdown-menu');
+                  
+                    // Event listener to toggle the dropdown menu visibility when the button is clicked
+                    menuButton.addEventListener('click', () => {
+                      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                  
+                      // Toggle the aria-expanded attribute and visibility of the dropdown
+                      menuButton.setAttribute('aria-expanded', !isExpanded);
+                      dropdownMenu.classList.toggle('hidden', isExpanded);
+                    });
+                  
+                    // Close the dropdown if clicked outside
+                    document.addEventListener('click', (event) => {
+                      if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.add('hidden');
+                        menuButton.setAttribute('aria-expanded', 'false');
+                      }
+                    });
+                  
+                    // Show the dropdown menu when the button is hovered over
+                    menuButton.addEventListener('mouseover', () => {
+                      dropdownMenu.classList.remove('hidden');
+                      menuButton.setAttribute('aria-expanded', 'true');
+                    });
+                  
+                    // Hide the dropdown menu when the mouse leaves the button or dropdown
+                    menuButton.addEventListener('mouseleave', () => {
+                      // Delay hiding to ensure the dropdown is not immediately hidden when the mouse is over it
+                      setTimeout(() => {
+                        if (!dropdownMenu.matches(':hover')) {
+                          dropdownMenu.classList.add('hidden');
+                          menuButton.setAttribute('aria-expanded', 'false');
+                        }
+                      }, 200); // Adding a slight delay before hiding
+                    });
+                  
+                    dropdownMenu.addEventListener('mouseenter', () => {
+                      dropdownMenu.classList.remove('hidden');
+                    });
+                  
+                    dropdownMenu.addEventListener('mouseleave', () => {
+                      // Delay hiding to ensure the dropdown stays visible while hovering over the dropdown
+                      setTimeout(() => {
+                        dropdownMenu.classList.add('hidden');
+                        menuButton.setAttribute('aria-expanded', 'false');
+                      }, 200); // Adding a slight delay before hiding
+                    });
+                  </script>
+                  
+                  
+                  
+                
+                
+                
+                <li><a class="inline-flex w-full  gap-x-1.5  bg-white text-gray-600 hover:text-black px-3 py-2 text-sm  hover:bg-gray-50" href="#">About us</a></li>
+                
+                <li><a class="inline-flex w-full  gap-x-1.5  bg-white text-gray-600 hover:text-black px-3 py-2 text-sm  hover:bg-gray-50" href="#">Contact</a></li>
+            </ul>
+            <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</a>
+            <a class="hidden lg:inline-block py-2 px-6 bg-indigo-600 hover:bg-indigo-800 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</a>
+        </nav>
+        <div class="navbar-menu relative z-50 hidden">
+            <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+            <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+                <div class="flex items-center mb-8">
+                    <a class="mr-auto text-3xl font-bold leading-none" href="#">
+                        <img src="./img/bird_2.jpg" class="object-cover max-h-13 mah-w-13 rounded-4xl" alt="">
+                    </a>
+                    <button class="navbar-close">
+                        <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Home</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Services</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Products</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">About us</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <div class="pt-6">
+                        <a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</a>
+                        <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
+                    </div>
+                    <p class="my-4 text-xs text-center text-gray-400">
+                        <span>Copyright © 2025</span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </body>
+    
+    <script>
+    // Burger menus
+        document.addEventListener('DOMContentLoaded', function() {
+        // open
+        const burger = document.querySelectorAll('.navbar-burger');
+        const menu = document.querySelectorAll('.navbar-menu');
+    
+        if (burger.length && menu.length) {
+            for (var i = 0; i < burger.length; i++) {
+                burger[i].addEventListener('click', function() {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle('hidden');
+                    }
+                });
+            }
+        }
+    
+        // close
+        const close = document.querySelectorAll('.navbar-close');
+        const backdrop = document.querySelectorAll('.navbar-backdrop');
+    
+        if (close.length) {
+            for (var i = 0; i < close.length; i++) {
+                close[i].addEventListener('click', function() {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle('hidden');
+                    }
+                });
+            }
+        }
+    
+        if (backdrop.length) {
+            for (var i = 0; i < backdrop.length; i++) {
+                backdrop[i].addEventListener('click', function() {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle('hidden');
+                    }
+                });
+            }
+        }
+    });    
+    </script>
+    <section class="px-2 py-36 bg-white md:px-0">
+        <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5 border-4 border-transparent rounded-md focus:outline-none py-1.5 focus:ring-4 focus:ring-indigo-600 focus:ring-opacity-80 hover:ring-4 hover:ring-indigo-600 hover:ring-opacity-70 hover:shadow-xl transition-all duration-500">
+          <div class="flex flex-wrap items-center sm:-mx-3  border-4 border-indigo-600   rounded-lg px-35 py-15">
+            <div class="w-full md:w-1/2 md:px-3">
+              <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+                <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                  <span class="block xl:inline">Your favorite pets</span>
+                  <span class="block text-indigo-600 xl:inline">On your door steps</span>
+                </h1>
+                <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl"></p>
+                <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+                  <a href="#_" class="flex items-center w-full px-6 py-3 mb-3 text-lg font-light text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
+                    Explore Pets
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </a>
+                  <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+                    Learn More
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2">
+              <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                      <!-- Item 1 -->
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-0" data-carousel-item>
+                        <img src="./img/pexels-chevanon-1108099.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <!-- Item 2 -->
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-denniz-futalan-339724-2306894.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <!-- Item 3 -->
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-couleur-2317904.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <!-- Item 4 -->
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-snapwire-46024.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <!-- Item 5 -->
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-wojciech-kumpicki-1084687-2071882.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-ngochuy-17904003.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-pixabay-372166.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-anh-bao-tran-le-1619456008-30550734.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                      <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                        <img src="./img/pexels-mikhail-nilov-7722519.jpg" class="absolute block w-full h-full object-cover" alt="...">
+                      </div>
+                    </div>
+                  
+                    <!-- Slider indicators -->
+                    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                      <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                    </div>
+                  
+                    <!-- Slider controls -->
+                    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                      </span>
+                    </button>
+                  
+                    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                      </span>
+                    </button>
+                  </div>
+                  
+                  <script>
+                    const carouselItems = document.querySelectorAll('[data-carousel-item]');
+                    const slideIndicators = document.querySelectorAll('[data-carousel-slide-to]');
+                    const prevButton = document.querySelector('[data-carousel-prev]');
+                    const nextButton = document.querySelector('[data-carousel-next]');
+                  
+                    let currentIndex = 0;
+                  
+                    const showSlide = (index) => {
+                      carouselItems.forEach((item, idx) => {
+                        // Remove translate-x-full or translate-x-0 classes from all items
+                        item.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full');
+                  
+                        // Add the appropriate translate classes
+                        if (idx === index) {
+                          item.classList.add('translate-x-0');
+                        } else if (idx < index) {
+                          item.classList.add('-translate-x-full');
+                        } else {
+                          item.classList.add('translate-x-full');
+                        }
+                      });
+                  
+                      // Update active state for indicators
+                      slideIndicators.forEach((indicator, idx) => {
+                        if (idx === index) {
+                          indicator.setAttribute('aria-current', 'true');
+                        } else {
+                          indicator.setAttribute('aria-current', 'false');
+                        }
+                      });
+                    };
+                  
+                    // Move to the next slide
+                    nextButton.addEventListener('click', () => {
+                      currentIndex = (currentIndex + 1) % carouselItems.length;
+                      showSlide(currentIndex);
+                    });
+                  
+                    // Move to the previous slide
+                    prevButton.addEventListener('click', () => {
+                      currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                      showSlide(currentIndex);
+                    });
+                  
+                    // Automatically move to the next slide every 3 seconds
+                    setInterval(() => {
+                      currentIndex = (currentIndex + 1) % carouselItems.length;
+                      showSlide(currentIndex);
+                    }, 3000);
+                  
+                    // Initialize carousel
+                    showSlide(currentIndex);
+                  </script>
+                </div>
+            </div>      
+        </div>          
+    </section>
+    <!-- Add Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<section class="w-full py-16 bg-white pt-30 pb-30" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200">
+  <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-6">
+    <!-- Product Slider Section with Rounded Corners -->
+    <div class="w-full lg:w-2/3 relative rounded-xl overflow-hidden mb-8 lg:mb-0"> <!-- Ensure the slider takes full width on mobile -->
+      <div class="swiper centered-slide-carousel swiper-container relative">
+        <div class="swiper-wrapper">
+          <!-- Product Card Slide 1 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/8906002482832_1.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 1" />
+            </div>
+          </div>
+          <!-- Product Card Slide 2 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/pexels-arina-krasnikova-7725617.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 2" />
+            </div>
+          </div>
+          <!-- Product Card Slide 3 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/nicat-almemmedov-_ZScq1gD66s-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 3" />
+            </div>
+          </div>
+          <!-- Product Card Slide 4 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/sam-moghadam-SRzVKw8l_tA-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 4" />
+            </div>
+          </div>
+          <!-- Product Card Slide 5 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/pexels-mathew-coulton-2358287-4445456.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 5" />
+            </div>
+          </div>
+          <!-- Product Card Slide 6 -->
+          <div class="swiper-slide">
+            <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+              <img src="./img/willian-justen-de-vasconcellos-1hBWrLIDSCc-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 6" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <!-- Text Section (No rounded corners applied) -->
+    <div class="w-full lg:w-1/3 px-8 text-center lg:text-left">
+      <h2 class="text-3xl lg:text-4xl font-semibold text-black mb-2">All the Pet Products</h2>
+      <h2 class="text-3xl lg:text-4xl font-semibold text-indigo-600 mb-4">in one place</h2>
+      <p class="text-lg text-gray-700 mb-4">Discover the best pet products that ensure your pets stay happy and healthy. From food to toys and accessories, we’ve got it all!</p>
+      <a href="#products" class="inline-block px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 mb-5">View Products</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Add Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  var swiper = new Swiper(".centered-slide-carousel", {
+    autoplay: {
+      delay: 3000, // Slide every 3 seconds
+      disableOnInteraction: false, // Keep autoplay running even if user interacts with the swiper
+    },
+    centeredSlides: true,
+    loop: true, // Infinite loop for smooth sliding
+    spaceBetween: 30,
+    slidesPerView: 1, // Display one card at a time
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true, // Enable dots to be clickable
+    },
+    breakpoints: {
+      1920: {
+        slidesPerView: 3, // Show 3 cards on large screens
+        spaceBetween: 20,
+      },
+      1028: {
+        slidesPerView: 2, // Show 2 cards on medium screens
+        spaceBetween: 15,
+      },
+      640: {
+        slidesPerView: 1, // Show 1 card on smaller screens
+        spaceBetween: 10,
+      },
+    },
+  });
+</script>
+<div class="overflow-hidden bg-white py-24 sm:py-32 " data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+      <div class="lg:pt-4 lg:pr-8">
+        <div class="lg:max-w-lg pt-25 pb-5">
+          <h2 class="text-base/7 font-semibold text-indigo-600">Veterinary Care for Your Pets</h2>
+          <p class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Your Pet's Health is Our </p>
+          <p class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-indigo-600 sm:text-5xl">First Priority </p>
+          <p class="mt-6 text-lg/8 text-gray-600">Every wag of the tail and every purr matters to us. We're here to provide your pets with the compassionate care they deserve. With our expert advice and personalized treatment plans, we ensure your furry family members live their healthiest, happiest lives. Their well-being is not just our job—it's our passion.</p>
+        </div>
+        
+        <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+          <a href="#_" class="flex items-center w-full px-6 py-3 mb-3 text-lg font-light text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
+            Book a Slot
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+            Ask queries
+          </a>
+        </div>
+      </div>
+      <img src="./img/veterinarian-check-ing-puppy-s-health.jpg" alt="Product screenshot" class="w-[48rem] max-w-none rounded-xl ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 lg:mb-8" width="2432" height="1442">
+    </div>
+  </div>
+</div>
+<section>
+  <div class="overflow-hidden bg-white py-24 sm:py-32" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:gap-x-16 lg:mx-0 lg:max-w-none">
+        
+        <!-- Carousel for Images -->
+        <div class="w-full mt-11">
+          <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+            <div id="custom-carousel" class="relative w-full" data-carousel="slide">
+              <!-- Carousel wrapper -->
+              <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                <!-- Item 1 -->
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-0" data-carousel-item>
+                  <img src="./img/grooming/pexels-slz-2144466065-29452052.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 1">
+                </div>
+                <!-- Item 2 -->
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-goochie-poochie-19145878.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 2">
+                </div>
+                <!-- Item 3 -->
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-goochie-poochie-19145885.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 3">
+                </div>
+                <!-- Item 4 -->
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-gustavo-fring-6816853.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 4">
+                </div>
+                <!-- Item 5 -->
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-gustavo-fring-6816860.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 5">
+                </div>
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-gustavo-fring-6816864.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 6">
+                </div>
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-tima-miroshnichenko-6131150.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 7">
+                </div>
+                <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
+                  <img src="./img/grooming/pexels-tima-miroshnichenko-6131163.jpg" class="absolute block w-full h-full object-cover" alt="In-Home Grooming 8">
+                </div>
+              </div>
+
+              <!-- Slider indicators -->
+              <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+              </div>
+
+              <!-- Slider controls -->
+              <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                  </svg>
+                  <span class="sr-only">Previous</span>
+                </span>
+              </button>
+
+              <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                  </svg>
+                  <span class="sr-only">Next</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text Section (In-Home Grooming Service) -->
+        <div class="lg:pt-4 lg:pl-8">
+          <div class="lg:max-w-lg ml-20 mb-8">
+            <h2 class="text-base font-semibold text-indigo-600">Grooming At-Home Service</h2>
+            <p class="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">The Comfort of Home, <a href="" class="text-indigo-600">The Care Your Pet Deserves</a></p>
+            <p class="mt-6 text-lg text-gray-600">We know that sometimes, it’s just easier to have your pet groomed right at home. Our In-Home Grooming Service brings professional care directly to your doorstep, allowing your pet to relax in their own familiar environment. We provide personalized grooming services that make your furry family members feel pampered, loved, and stress-free—without leaving home.</p>
+          </div>
+          
+          <div class="relative flex flex-col sm:flex-row sm:space-x-4 ml-20 mb-8">
+            <a href="#_" class="flex items-center w-full px-6 py-3 mb-3 text-lg font-light text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
+              Book an Appointment
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+              Ask a Question
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom JS for the Carousel -->
+<script>
+  const carouselItemsCustom = document.querySelectorAll('#custom-carousel [data-carousel-item]');
+  const slideIndicatorsCustom = document.querySelectorAll('#custom-carousel [data-carousel-slide-to]');
+  const prevButtonCustom = document.querySelector('#custom-carousel [data-carousel-prev]');
+  const nextButtonCustom = document.querySelector('#custom-carousel [data-carousel-next]');
+
+  let currentIndexCustom = 0;
+
+  const showSlideCustom = (index) => {
+    // Hide all slides and reset the transform classes
+    carouselItemsCustom.forEach((item, idx) => {
+      item.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full');
+      
+      // Show the current slide
+      if (idx === index) {
+        item.classList.add('translate-x-0');
+      } else if (idx < index) {
+        item.classList.add('-translate-x-full');
+      } else {
+        item.classList.add('translate-x-full');
+      }
+    });
+
+    // Update the slide indicators
+    slideIndicatorsCustom.forEach((indicator, idx) => {
+      if (idx === index) {
+        indicator.setAttribute('aria-current', 'true');
+      } else {
+        indicator.setAttribute('aria-current', 'false');
+      }
+    });
+  };
+
+  // Move to the next slide
+  nextButtonCustom.addEventListener('click', () => {
+    currentIndexCustom = (currentIndexCustom + 1) % carouselItemsCustom.length; // Loop back to the first item after the last one
+    showSlideCustom(currentIndexCustom);
+  });
+
+  // Move to the previous slide
+  prevButtonCustom.addEventListener('click', () => {
+    currentIndexCustom = (currentIndexCustom - 1 + carouselItemsCustom.length) % carouselItemsCustom.length; // Loop to the last item if we go before the first one
+    showSlideCustom(currentIndexCustom);
+  });
+
+  // Automatically move to the next slide every 3 seconds
+  setInterval(() => {
+    currentIndexCustom = (currentIndexCustom + 1) % carouselItemsCustom.length;
+    showSlideCustom(currentIndexCustom);
+  }, 3000);
+
+  // Initialize carousel
+  showSlideCustom(currentIndexCustom);  // Show the first slide initially
+</script>
+
+
+
+
+
+
+<section class="py-24 bg-gray-50" data-aos="fade-up">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
+      <div class="flex justify-between items-center flex-col lg:flex-row md:mt-20">
+          <div class="w-full lg:w-1/2">
+              <h2 class="font-manrope text-5xl text-gray-900 font-semibold leading-[4rem] mb-7 text-center lg:text-left">
+                  Meet our <a href="" class="text-indigo-600">Team</a>
+              </h2>
+              <p class="text-lg text-gray-500 mb-16 text-center lg:text-left">Our leading, strong & creative minds.These people work on making our
+                  services and products best.</p>
+              <button class="cursor-pointer py-3 px-8 w-60 bg-indigo-600 text-white text-base font-semibold transition-all duration-500 block text-center rounded-full hover:bg-indigo-700 mx-auto lg:mx-0">
+                  Join our team
+              </button>
+          </div>
+          <div class="w-full lg:w-1/2 lg:mt-0 md:mt-40 mt-16 max-lg:max-w-2xl">
+              <div class="grid grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-4 gap-8">
+                  <img src="./img/saadee.jpeg" alt="Team tailwind section"
+                      class="w-44 h-56 rounded-2xl object-cover md:mt-20 mx-auto min-[450px]:mr-0" />
+                  <img src="./img/niyathi.jpeg" alt="Team tailwind section"
+                      class="w-44 h-56 rounded-2xl object-cover mx-auto min-[450px]:ml-0 md:mx-auto" />
+                  <img src="./img/anamika1.jpeg" alt="Team tailwind section"
+                      class="w-44 h-56 rounded-2xl object-cover md:mt-20 mx-auto min-[450px]:mr-0 md:ml-0" />
+                  <img src="./img/bona.jpeg" alt="Team tailwind section"
+                      class="w-44 h-56 rounded-2xl object-cover mx-auto min-[450px]:ml-0 md:mr-0 md:ml-auto" />
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<footer class="w-full">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!--Grid-->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-8 md:gap-8 py-10 max-w-sm mx-auto sm:max-w-3xl lg:max-w-full">
+          <div class="col-span-full mb-10 lg:col-span-2  lg:mb-0">
+            <a href="#" class="flex justify-center lg:justify-start items-center space-x-1">
+              <img src="./img/bird_2.jpg" alt="logo" class="object-cover  max-h-16 max-w-16">
+              <span class="text-2xl  font-semibold font-pacifico  text-transparent bg-clip-text bg-gradient-to-r to-indigo-700 from-violet-500">
+                Furmount
+              </span>
+            </a>
+            <p class="py-3 text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">Trusted in more than 100 countries & 5 million customers. Have any query ?</p>
+            <a href="javascript:;"  class="py-2.5 px-5 h-9 block w-fit bg-indigo-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-indigo-700 lg:mx-0">
+              Contact us
+            </a>
+          </div>
+          <!--End Col-->
+          <div class="lg:mx-auto text-left pl-4">
+              <h4 class="text-lg text-gray-900 font-medium mb-6 ">Furmount</h4>
+              <ul class="text-sm  transition-all duration-500">
+                  <li class="mb-6"><a href="javascript:;"  class="text-gray-600 hover:text-gray-900">Home</a></li>
+                  <li class="mb-6"><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">About</a></li>
+                  <li><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">Services</a></li>
+              </ul>
+          </div>
+          <!--End Col-->
+          <div class="lg:mx-auto text-left ">
+              <h4 class="text-lg text-gray-900 font-medium mb-6">Products</h4>
+              <ul class="text-sm  transition-all duration-500">
+                  <li class="mb-6"><a href="javascript:;"  class="text-gray-600 hover:text-gray-900">Pet Foods</a></li>
+                  <li class="mb-6"><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">Pet Toys</a></li>
+                  <li><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">Pet accessories</a></li>
+              </ul>
+          </div>
+          <!--End Col-->
+          <div class="lg:mx-auto text-left ">
+              <h4 class="text-lg text-gray-900 font-medium mb-6">Support</h4>
+              <ul class="text-sm  transition-all duration-500">
+                  <li class="mb-6"><a href="javascript:;"  class="text-gray-600 hover:text-gray-900">Customer Support</a></li>
+                  <li class="mb-6"><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">Terms & Conditions</a></li>
+                  <li ><a href="javascript:;"  class=" text-gray-600 hover:text-gray-900">Privacy Policy</a></li>
+              </ul>
+          </div>
+          <!--End Col-->
+          <div class="lg:mx-auto text-left ">
+              <h4 class="text-lg text-gray-900 font-medium mb-6">Subscribe</h4>
+              <p class="text-sm text-gray-500 leading-6 mb-7">Subscribe to get the latest news from us</p>
+              <a href="javascript:;"  class="flex items-center justify-center gap-2 border border-indigo-600 rounded-full py-3 px-6 w-fit lg:mx-0  text-sm text-indigo-600 font-semibold transition-all duration-500 hover:bg-indigo-50">Subscribe<svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.25 6L13.25 6M9.5 10.5L13.4697 6.53033C13.7197 6.28033 13.8447 6.15533 13.8447 6C13.8447 5.84467 13.7197 5.71967 13.4697 5.46967L9.5 1.5" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  </a>
+          </div>
+      </div>
+      <!--Grid-->
+      <div class="py-7 border-t border-gray-200">
+        <div class="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
+            <span class="text-sm text-gray-500 ">©<a href="https://pagedone.io/">furmount</a> 2025, All rights reserved.</span>
+            <div class="flex mt-4 space-x-4 sm:justify-center lg:mt-0 ">
+                <a href="javascript:;"  class="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <g id="Social Media">
+                    <path id="Vector" d="M11.3214 8.93666L16.4919 3.05566H15.2667L10.7772 8.16205L7.1914 3.05566H3.05566L8.47803 10.7774L3.05566 16.9446H4.28097L9.022 11.552L12.8088 16.9446H16.9446L11.3211 8.93666H11.3214ZM9.64322 10.8455L9.09382 10.0765L4.72246 3.95821H6.60445L10.1322 8.8959L10.6816 9.66481L15.2672 16.083H13.3852L9.64322 10.8458V10.8455Z" fill="white"/>
+                    </g>
+                  </svg>
+                </a>
+                <a href="javascript:;"  class="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600">
+                    <svg class="w-[1.25rem] h-[1.125rem] text-white" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.70975 7.93663C4.70975 6.65824 5.76102 5.62163 7.0582 5.62163C8.35537 5.62163 9.40721 6.65824 9.40721 7.93663C9.40721 9.21502 8.35537 10.2516 7.0582 10.2516C5.76102 10.2516 4.70975 9.21502 4.70975 7.93663ZM3.43991 7.93663C3.43991 9.90608 5.05982 11.5025 7.0582 11.5025C9.05658 11.5025 10.6765 9.90608 10.6765 7.93663C10.6765 5.96719 9.05658 4.37074 7.0582 4.37074C5.05982 4.37074 3.43991 5.96719 3.43991 7.93663ZM9.97414 4.22935C9.97408 4.39417 10.0236 4.55531 10.1165 4.69239C10.2093 4.82946 10.3413 4.93633 10.4958 4.99946C10.6503 5.06259 10.8203 5.07916 10.9844 5.04707C11.1484 5.01498 11.2991 4.93568 11.4174 4.81918C11.5357 4.70268 11.6163 4.55423 11.649 4.39259C11.6817 4.23095 11.665 4.06339 11.6011 3.91109C11.5371 3.7588 11.4288 3.6286 11.2898 3.53698C11.1508 3.44536 10.9873 3.39642 10.8201 3.39635H10.8197C10.5955 3.39646 10.3806 3.48424 10.222 3.64043C10.0635 3.79661 9.97434 4.00843 9.97414 4.22935ZM4.21142 13.5892C3.52442 13.5584 3.15101 13.4456 2.90286 13.3504C2.57387 13.2241 2.33914 13.0738 2.09235 12.8309C1.84555 12.588 1.69278 12.3569 1.56527 12.0327C1.46854 11.7882 1.3541 11.4201 1.32287 10.7431C1.28871 10.0111 1.28189 9.79119 1.28189 7.93669C1.28189 6.08219 1.28927 5.86291 1.32287 5.1303C1.35416 4.45324 1.46944 4.08585 1.56527 3.84069C1.69335 3.51647 1.84589 3.28513 2.09235 3.04191C2.3388 2.79869 2.57331 2.64813 2.90286 2.52247C3.1509 2.42713 3.52442 2.31435 4.21142 2.28358C4.95417 2.24991 5.17729 2.24319 7.0582 2.24319C8.9391 2.24319 9.16244 2.25047 9.90582 2.28358C10.5928 2.31441 10.9656 2.42802 11.2144 2.52247C11.5434 2.64813 11.7781 2.79902 12.0249 3.04191C12.2717 3.2848 12.4239 3.51647 12.552 3.84069C12.6487 4.08513 12.7631 4.45324 12.7944 5.1303C12.8285 5.86291 12.8354 6.08219 12.8354 7.93669C12.8354 9.79119 12.8285 10.0105 12.7944 10.7431C12.7631 11.4201 12.6481 11.7881 12.552 12.0327C12.4239 12.3569 12.2714 12.5882 12.0249 12.8309C11.7784 13.0736 11.5434 13.2241 11.2144 13.3504C10.9663 13.4457 10.5928 13.5585 9.90582 13.5892C9.16306 13.6229 8.93994 13.6296 7.0582 13.6296C5.17645 13.6296 4.95395 13.6229 4.21142 13.5892ZM4.15307 1.03424C3.40294 1.06791 2.89035 1.18513 2.4427 1.3568C1.9791 1.53408 1.58663 1.77191 1.19446 2.1578C0.802277 2.54369 0.56157 2.93108 0.381687 3.38797C0.207498 3.82941 0.0885535 4.3343 0.0543922 5.07358C0.0196672 5.81402 0.0117188 6.05074 0.0117188 7.93663C0.0117188 9.82252 0.0196672 10.0592 0.0543922 10.7997C0.0885535 11.539 0.207498 12.0439 0.381687 12.4853C0.56157 12.9419 0.802334 13.3297 1.19446 13.7155C1.58658 14.1012 1.9791 14.3387 2.4427 14.5165C2.89119 14.6881 3.40294 14.8054 4.15307 14.839C4.90479 14.8727 5.1446 14.8811 7.0582 14.8811C8.9718 14.8811 9.212 14.8732 9.96332 14.839C10.7135 14.8054 11.2258 14.6881 11.6737 14.5165C12.137 14.3387 12.5298 14.1014 12.9219 13.7155C13.3141 13.3296 13.5543 12.9419 13.7347 12.4853C13.9089 12.0439 14.0284 11.539 14.062 10.7997C14.0962 10.0587 14.1041 9.82252 14.1041 7.93663C14.1041 6.05074 14.0962 5.81402 14.062 5.07358C14.0278 4.33424 13.9089 3.82913 13.7347 3.38797C13.5543 2.93135 13.3135 2.5443 12.9219 2.1578C12.5304 1.7713 12.137 1.53408 11.6743 1.3568C11.2258 1.18513 10.7135 1.06735 9.96388 1.03424C9.21256 1.00058 8.97236 0.992188 7.05876 0.992188C5.14516 0.992188 4.90479 1.00002 4.15307 1.03424Z" fill="currentColor"/>
+                        </svg>
+                        
+                </a>
+                <a href="javascript:;"  class="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600">
+                    <svg class="w-[1rem] h-[1rem] text-white" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.8794 11.5527V3.86835H0.318893V11.5527H2.87967H2.8794ZM1.59968 2.81936C2.4924 2.81936 3.04817 2.2293 3.04817 1.49188C3.03146 0.737661 2.4924 0.164062 1.61666 0.164062C0.74032 0.164062 0.167969 0.737661 0.167969 1.49181C0.167969 2.22923 0.723543 2.8193 1.5829 2.8193H1.59948L1.59968 2.81936ZM4.29668 11.5527H6.85698V7.26187C6.85698 7.03251 6.87369 6.80255 6.94134 6.63873C7.12635 6.17968 7.54764 5.70449 8.25514 5.70449C9.18141 5.70449 9.55217 6.4091 9.55217 7.44222V11.5527H12.1124V7.14672C12.1124 4.78652 10.8494 3.68819 9.16483 3.68819C7.78372 3.68819 7.17715 4.45822 6.84014 4.98267H6.85718V3.86862H4.29681C4.33023 4.5895 4.29661 11.553 4.29661 11.553L4.29668 11.5527Z" fill="currentColor"/>
+                        </svg>
+                        
+                </a>
+                <a href="javascript:;"  class="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600">
+                    <svg class="w-[1.25rem] h-[0.875rem] text-white" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9346 1.13529C14.5684 1.30645 15.0665 1.80588 15.2349 2.43896C15.5413 3.58788 15.5413 5.98654 15.5413 5.98654C15.5413 5.98654 15.5413 8.3852 15.2349 9.53412C15.0642 10.1695 14.5661 10.669 13.9346 10.8378C12.7886 11.1449 8.19058 11.1449 8.19058 11.1449C8.19058 11.1449 3.59491 11.1449 2.44657 10.8378C1.81277 10.6666 1.31461 10.1672 1.14622 9.53412C0.839844 8.3852 0.839844 5.98654 0.839844 5.98654C0.839844 5.98654 0.839844 3.58788 1.14622 2.43896C1.31695 1.80353 1.81511 1.30411 2.44657 1.13529C3.59491 0.828125 8.19058 0.828125 8.19058 0.828125C8.19058 0.828125 12.7886 0.828125 13.9346 1.13529ZM10.541 5.98654L6.72178 8.19762V3.77545L10.541 5.98654Z" fill="currentColor"/>
+                        </svg>
+                        
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</footer>
+                                      
+
+<!-- AOS JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  // Initialize AOS
+  AOS.init({
+      duration: 1000,  // Duration of the animation
+      offset: 200,     // Offset from the top before the animation triggers
+  });
+</script>
+
+
+
+
+
+</body>
+</html>

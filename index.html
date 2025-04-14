@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./output.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
 
   <style>
     /* Ensure smooth transition for the slider */
@@ -87,56 +88,7 @@
                     </div>
                   </div>
                   
-                  <script>
-                    const menuButton = document.getElementById('menu-button');
-                    const dropdownMenu = document.getElementById('dropdown-menu');
                   
-                    // Event listener to toggle the dropdown menu visibility when the button is clicked
-                    menuButton.addEventListener('click', () => {
-                      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-                  
-                      // Toggle the aria-expanded attribute and visibility of the dropdown
-                      menuButton.setAttribute('aria-expanded', !isExpanded);
-                      dropdownMenu.classList.toggle('hidden', isExpanded);
-                    });
-                  
-                    // Close the dropdown if clicked outside
-                    document.addEventListener('click', (event) => {
-                      if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                        dropdownMenu.classList.add('hidden');
-                        menuButton.setAttribute('aria-expanded', 'false');
-                      }
-                    });
-                  
-                    // Show the dropdown menu when the button is hovered over
-                    menuButton.addEventListener('mouseover', () => {
-                      dropdownMenu.classList.remove('hidden');
-                      menuButton.setAttribute('aria-expanded', 'true');
-                    });
-                  
-                    // Hide the dropdown menu when the mouse leaves the button or dropdown
-                    menuButton.addEventListener('mouseleave', () => {
-                      // Delay hiding to ensure the dropdown is not immediately hidden when the mouse is over it
-                      setTimeout(() => {
-                        if (!dropdownMenu.matches(':hover')) {
-                          dropdownMenu.classList.add('hidden');
-                          menuButton.setAttribute('aria-expanded', 'false');
-                        }
-                      }, 200); // Adding a slight delay before hiding
-                    });
-                  
-                    dropdownMenu.addEventListener('mouseenter', () => {
-                      dropdownMenu.classList.remove('hidden');
-                    });
-                  
-                    dropdownMenu.addEventListener('mouseleave', () => {
-                      // Delay hiding to ensure the dropdown stays visible while hovering over the dropdown
-                      setTimeout(() => {
-                        dropdownMenu.classList.add('hidden');
-                        menuButton.setAttribute('aria-expanded', 'false');
-                      }, 200); // Adding a slight delay before hiding
-                    });
-                  </script>
                   
                   
                   
@@ -195,48 +147,7 @@
         </div>
     </body>
     
-    <script>
-    // Burger menus
-        document.addEventListener('DOMContentLoaded', function() {
-        // open
-        const burger = document.querySelectorAll('.navbar-burger');
-        const menu = document.querySelectorAll('.navbar-menu');
     
-        if (burger.length && menu.length) {
-            for (var i = 0; i < burger.length; i++) {
-                burger[i].addEventListener('click', function() {
-                    for (var j = 0; j < menu.length; j++) {
-                        menu[j].classList.toggle('hidden');
-                    }
-                });
-            }
-        }
-    
-        // close
-        const close = document.querySelectorAll('.navbar-close');
-        const backdrop = document.querySelectorAll('.navbar-backdrop');
-    
-        if (close.length) {
-            for (var i = 0; i < close.length; i++) {
-                close[i].addEventListener('click', function() {
-                    for (var j = 0; j < menu.length; j++) {
-                        menu[j].classList.toggle('hidden');
-                    }
-                });
-            }
-        }
-    
-        if (backdrop.length) {
-            for (var i = 0; i < backdrop.length; i++) {
-                backdrop[i].addEventListener('click', function() {
-                    for (var j = 0; j < menu.length; j++) {
-                        menu[j].classList.toggle('hidden');
-                    }
-                });
-            }
-        }
-    });    
-    </script>
     <section class="px-2 py-36 bg-white md:px-0">
       <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5 border-4 border-transparent rounded-md focus:outline-none py-1.5 focus:ring-4 focus:ring-indigo-600 focus:ring-opacity-80 hover:ring-4 hover:ring-indigo-600 hover:ring-opacity-70 hover:shadow-xl transition-all duration-500">
         <div class="flex flex-wrap items-center sm:-mx-3 border-4 border-indigo-600 rounded-lg px-35 py-15">
@@ -270,35 +181,32 @@
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                   <!-- Item 1 -->
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-0" data-carousel-item>
-                    <img src="./img/pexels-chevanon-1108099.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 1" loading="lazy">
+                    <img src="./img/webp/pexels-chevanon-1108099.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 1" loading="lazy">
                   </div>
                   <!-- Item 2 -->
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-denniz-futalan-339724-2306894.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 2" loading="lazy">
+                    <img src="./img/webp/pexels-denniz-futalan-339724-2306894.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 2" loading="lazy">
                   </div>
                   <!-- Item 3 -->
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-couleur-2317904.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 3" loading="lazy">
+                    <img src="./img/webp/pexels-couleur-2317904.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 3" loading="lazy">
                   </div>
                   <!-- Item 4 -->
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-snapwire-46024.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 4" loading="lazy">
+                    <img src="./img/webp/pexels-snapwire-46024.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 4" loading="lazy">
                   </div>
                   <!-- Item 5 -->
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-wojciech-kumpicki-1084687-2071882.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 5" loading="lazy">
+                    <img src="./img/webp/pexels-wojciech-kumpicki-1084687-2071882.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 5" loading="lazy">
                   </div>
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-ngochuy-17904003.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 6" loading="lazy">
+                    <img src="./img/webp/pexels-pixabay-372166.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 5" loading="lazy">
                   </div>
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-pixabay-372166.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 7" loading="lazy">
+                    <img src="./img/webp/pexels-monique-laats-230726-736530.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 5" loading="lazy">
                   </div>
                   <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-anh-bao-tran-le-1619456008-30550734.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 8" loading="lazy">
-                  </div>
-                  <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform translate-x-full" data-carousel-item>
-                    <img src="./img/pexels-mikhail-nilov-7722519.jpg" class="absolute block w-full h-full object-cover" alt="Pet Image 9" loading="lazy">
+                    <img src="./img/webp/pexels-mikhail-nilov-7722519.webp" class="absolute block w-full h-full object-cover" alt="Pet Image 5" loading="lazy">
                   </div>
                 </div>
     
@@ -336,61 +244,7 @@
       </div>
     </section>
     
-    <script>
-      // JavaScript for Carousel Functionality
-      const carouselItems = document.querySelectorAll('[data-carousel-item]');
-      const slideIndicators = document.querySelectorAll('[data-carousel-slide-to]');
-      const prevButton = document.querySelector('[data-carousel-prev]');
-      const nextButton = document.querySelector('[data-carousel-next]');
     
-      let currentIndex = 0;
-    
-      const showSlide = (index) => {
-        carouselItems.forEach((item, idx) => {
-          // Remove translate-x-full or translate-x-0 classes from all items
-          item.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full');
-    
-          // Add the appropriate translate classes
-          if (idx === index) {
-            item.classList.add('translate-x-0');
-          } else if (idx < index) {
-            item.classList.add('-translate-x-full');
-          } else {
-            item.classList.add('translate-x-full');
-          }
-        });
-    
-        // Update active state for indicators
-        slideIndicators.forEach((indicator, idx) => {
-          if (idx === index) {
-            indicator.setAttribute('aria-current', 'true');
-          } else {
-            indicator.setAttribute('aria-current', 'false');
-          }
-        });
-      };
-    
-      // Move to the next slide
-      nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        showSlide(currentIndex);
-      });
-    
-      // Move to the previous slide
-      prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-        showSlide(currentIndex);
-      });
-    
-      // Automatically move to the next slide every 3 seconds
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        showSlide(currentIndex);
-      }, 3000);
-    
-      // Initialize carousel
-      showSlide(currentIndex);
-    </script>
         <!-- Add Swiper CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
@@ -409,31 +263,31 @@
           <!-- Product Card Slide 2 -->
           <div class="swiper-slide">
             <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-              <img src="./img/pexels-arina-krasnikova-7725617.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 2" />
+              <img src="./img/webp/pexels-arina-krasnikova-7725617.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 2" />
             </div>
           </div>
           <!-- Product Card Slide 3 -->
           <div class="swiper-slide">
             <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-              <img src="./img/nicat-almemmedov-_ZScq1gD66s-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 3" />
+              <img src="./img/webp/nicat-almemmedov-_ZScq1gD66s-unsplash.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 3" />
             </div>
           </div>
           <!-- Product Card Slide 4 -->
           <div class="swiper-slide">
             <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-              <img src="./img/sam-moghadam-SRzVKw8l_tA-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 4" />
+              <img src="./img/webp/sam-moghadam-SRzVKw8l_tA-unsplash.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 4" />
             </div>
           </div>
           <!-- Product Card Slide 5 -->
           <div class="swiper-slide">
             <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-              <img src="./img/pexels-mathew-coulton-2358287-4445456.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 5" />
+              <img src="./img/webp/pexels-mathew-coulton-2358287-4445456.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 5" />
             </div>
           </div>
           <!-- Product Card Slide 6 -->
           <div class="swiper-slide">
             <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-              <img src="./img/willian-justen-de-vasconcellos-1hBWrLIDSCc-unsplash.jpg" class="w-full h-full object-cover rounded-2xl" alt="Product 6" />
+              <img src="./img/webp/willian-justen-de-vasconcellos-1hBWrLIDSCc-unsplash.webp" class="w-full h-full object-cover rounded-2xl" alt="Product 6" />
             </div>
           </div>
         </div>
@@ -455,38 +309,7 @@
 
 
 <!-- Add Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<script>
-  var swiper = new Swiper(".centered-slide-carousel", {
-    autoplay: {
-      delay: 3000, // Slide every 3 seconds
-      disableOnInteraction: false, // Keep autoplay running even if user interacts with the swiper
-    },
-    centeredSlides: true,
-    loop: true, // Infinite loop for smooth sliding
-    spaceBetween: 30,
-    slidesPerView: 1, // Display one card at a time
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true, // Enable dots to be clickable
-    },
-    breakpoints: {
-      1920: {
-        slidesPerView: 3, // Show 3 cards on large screens
-        spaceBetween: 20,
-      },
-      1028: {
-        slidesPerView: 2, // Show 2 cards on medium screens
-        spaceBetween: 15,
-      },
-      640: {
-        slidesPerView: 1, // Show 1 card on smaller screens
-        spaceBetween: 10,
-      },
-    },
-  });
-</script>
 <div class="overflow-hidden bg-white py-24 sm:py-32 " data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -692,122 +515,7 @@
 </section>
 
 <!-- Optimized Carousel JavaScript -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Cache DOM elements
-  const carousel = document.getElementById('custom-carousel');
-  if (!carousel) return;
 
-  const items = carousel.querySelectorAll('[data-carousel-item]');
-  const indicators = carousel.querySelectorAll('[data-carousel-slide-to]');
-  const prevBtn = carousel.querySelector('[data-carousel-prev]');
-  const nextBtn = carousel.querySelector('[data-carousel-next]');
-  
-  if (!items.length) return;
-
-  let currentIndex = 0;
-  let autoSlideInterval;
-  let isAnimating = false;
-  const animationDuration = 700; // Match CSS transition duration
-
-  // Debounce function to prevent rapid firing
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        func.apply(context, args);
-      }, wait);
-    };
-  }
-
-  // Show slide with animation
-  function showSlide(index) {
-    if (isAnimating) return;
-    isAnimating = true;
-    
-    // Use requestAnimationFrame for smoother animations
-    requestAnimationFrame(() => {
-      items.forEach((item, idx) => {
-        item.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full');
-        
-        if (idx === index) {
-          item.classList.add('translate-x-0');
-        } else if (idx < index) {
-          item.classList.add('-translate-x-full');
-        } else {
-          item.classList.add('translate-x-full');
-        }
-      });
-
-      // Update indicators
-      indicators.forEach((indicator, idx) => {
-        indicator.setAttribute('aria-current', idx === index ? 'true' : 'false');
-      });
-      
-      // Reset animation flag after the transition completes
-      setTimeout(() => {
-        isAnimating = false;
-      }, animationDuration);
-    });
-  }
-
-  // Next slide function
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % items.length;
-    showSlide(currentIndex);
-  }
-
-  // Previous slide function
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    showSlide(currentIndex);
-  }
-
-  // Initialize auto-slide
-  function startAutoSlide() {
-    stopAutoSlide(); // Clear any existing interval
-    autoSlideInterval = setInterval(nextSlide, 3000);
-  }
-
-  function stopAutoSlide() {
-    if (autoSlideInterval) {
-      clearInterval(autoSlideInterval);
-    }
-  }
-
-  // Event listeners with debouncing
-  if (nextBtn) {
-    nextBtn.addEventListener('click', debounce(nextSlide, 300));
-  }
-  
-  if (prevBtn) {
-    prevBtn.addEventListener('click', debounce(prevSlide, 300));
-  }
-
-  // Indicator click handlers
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', debounce(() => {
-      currentIndex = index;
-      showSlide(currentIndex);
-    }, 300));
-  });
-
-  // Pause on hover
-  carousel.addEventListener('mouseenter', stopAutoSlide);
-  carousel.addEventListener('mouseleave', startAutoSlide);
-  carousel.addEventListener('touchstart', stopAutoSlide);
-  carousel.addEventListener('touchend', startAutoSlide);
-
-  // Initialize
-  showSlide(currentIndex);
-  startAutoSlide();
-
-  // Cleanup on window unload
-  window.addEventListener('beforeunload', stopAutoSlide);
-});
-</script>
 
 
 
@@ -931,20 +639,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </footer>
                                       
 
-<!-- AOS JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-<script>
-  // Initialize AOS
-  AOS.init({
-      duration: 1000,  // Duration of the animation
-      offset: 200,     // Offset from the top before the animation triggers
-  });
-</script>
-
-
-
-
-
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="./main.js"></script>
 </body>
 </html>
